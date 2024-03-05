@@ -9,7 +9,16 @@ import { MongoDBURL } from "./config.js";
 //import books
 import { Book } from "./models/bookModel.js";
 
+
+
+
+
+
 const app = express();
+
+//Middleware
+app.use(express.json());
+
 
 app.get("/", (req, res) => {
   console.log(req);
@@ -32,6 +41,7 @@ app.post("/books", async (req, res) => {
         publishYear: req.body.publishYear,
     };
 const book = await Book.create(newBook);
+return res.status(201).send(book);
 
 
   } catch (error) {
@@ -45,6 +55,25 @@ const book = await Book.create(newBook);
 
 app.listen(PORT, () => {
   console.log(`app is listning to ${PORT}`);
+});
+
+
+//get all books from db
+app.get('/books', async (req, res) => {
+
+    try {
+        const books = await Book.find({});
+
+
+
+        return res.status(200).json({
+            count: books.length,
+            data: books
+        });
+    } catch (error) {
+        console.log(error.message);
+        res.status(500).send({ message: error.message });
+    }
 });
 
 mongoose
