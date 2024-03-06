@@ -11,11 +11,19 @@ import { Book } from "./models/bookModel.js";
 //import bookRoute
 import booksRoute from './routes/booksRoute.js'
 
+//import cors
+import cors from 'cors'
+
+
 
 const app = express();
 
 //Middleware
 app.use(express.json());
+
+//use cors
+app.use(cors());
+
 
 app.get("/", (req, res) => {
   console.log(req);
