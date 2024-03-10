@@ -1,37 +1,37 @@
-//express
-import express, { response } from "express";
-import { PORT } from "./config.js";
+// //express
+// import express, { response } from "express";
+// import { PORT } from "./config.js";
 
-import mongoose from "mongoose";
+// import mongoose from "mongoose";
 
-import { MongoDBURL } from "./config.js";
+// import { MongoDBURL } from "./config.js";
 
-//import books
-import { Book } from "./models/bookModel.js";
-//import bookRoute
-import booksRoute from './routes/booksRoute.js'
+// //import books
+// import { Book } from "./models/bookModel.js";
+// //import bookRoute
+// import booksRoute from './routes/booksRoute.js'
 
-//import cors
-import cors from 'cors'
-
-
-
-const app = express();
-
-//Middleware
-app.use(express.json());
-
-//use cors
-app.use(cors());
+// //import cors
+// import cors from 'cors'
 
 
-app.get("/", (req, res) => {
-  console.log(req);
-  return res.status(234).send("hello world");
-});
+
+// const app = express();
+
+// //Middleware
+// app.use(express.json());
+
+// //use cors
+// app.use(cors());
 
 
-app.use('/books' ,booksRoute);
+// app.get("/", (req, res) => {
+//   console.log(req);
+//   return res.status(234).send("hello world");
+// });
+
+
+// app.use('/books' ,booksRoute);
 
 
 
@@ -57,7 +57,6 @@ app.use('/books' ,booksRoute);
 //     //?? return?
 //   }
 // });
-
 
 
 
@@ -131,15 +130,65 @@ app.use('/books' ,booksRoute);
 
 
 
+// mongoose
+//   .connect(MongoDBURL)
+//   .then(() => {
+//     console.log("connected to database");
+//     app.listen(PORT, () => {
+//       console.log(`app is listning to ${PORT}`);
+//     });
+    
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
+
+
+
+
+
+// Express
+import express from "express";
+import { PORT } from "./config.js";
+
+import mongoose from "mongoose";
+
+import { MongoDBURL } from "./config.js";
+
+// Import books model and routes
+import { Book } from "./models/bookModel.js";
+import booksRoute from "./routes/booksRoute.js";
+
+// Import CORS for cross-origin requests (if needed)
+import cors from "cors";
+
+const app = express();
+
+// Middleware
+app.use(express.json());
+
+// Enable CORS (adjust origins as needed)
+app.use(cors());; // Replace with your frontend URL
+
+// Routes
+app.get("/", (req, res) => {
+  console.log(req);
+  return res.status(200).send("Hello world from backend!");
+});
+
+// Use the book routes defined in booksRoute.js
+app.use("/books", booksRoute);
+
+// Connect to MongoDB
 mongoose
   .connect(MongoDBURL)
   .then(() => {
-    console.log("connected to database");
+    console.log("Connected to database");
     app.listen(PORT, () => {
-      console.log(`app is listning to ${PORT}`);
+      console.log(`App listening on port ${PORT}`);
     });
-    
   })
   .catch((error) => {
-    console.log(error);
+    console.error(error);
+    process.exit(1); // Exit process on error
   });

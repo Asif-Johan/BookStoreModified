@@ -1,23 +1,31 @@
-import React from 'react'
-import {Routes, Route} from 'react'
+import React from 'react';
 
-//import from pages
-import Home from './pages/home';
-import createBooks from './pages/createBooks';
-import deleteBooks from './pages/deleteBook';
-import editBook from './pages/editBook';
-import showBook from './pages/showBook';
+import { Routes, Route } from 'react-router-dom';
+
+import Home from './pages/home.jsx';
+import CreateBook from './pages/CreateBook.jsx';
+import EditBook from './pages/editBook.jsx';
+import DeleteBook from './pages/deleteBook.jsx';
+import ShowBook from './pages/showBook.jsx';
+
 
 
 const App = () => {
   return (
-    <Routes>
-      <Route path='/' element={<Home></Home>}/>
-      <Route path='/books/create' element={<createBooks></createBooks>}/>
-      <Route path='/books/details/:id' element={<showBook></showBook>}/>
-      <Route path='/book/edit/:id' element={<editBook></editBook>}/>
-      <Route path='/book/delete/:id' element={<deleteBooks></deleteBooks>}/>
-    </Routes>
+    <>
+    <div className='flex justify-center align-top bg-red-400 py-2 text-rose-50'>Hi Just checking</div>
+
+
+    
+   <Routes>
+    <Route path='/' element= {<Home/>} />
+    <Route path='/books/create' element= {<CreateBook/>} />
+    <Route path='/books/edit/:id' element= {<EditBook></EditBook>} />
+    <Route path='/books/details/:id' element= {<ShowBook></ShowBook>} />
+    <Route path='/books/delete/:id' element= {<DeleteBook/>} />
+   </Routes>
+
+   </>
   )
 }
 
