@@ -168,7 +168,7 @@ const app = express();
 app.use(express.json());
 
 // Enable CORS (adjust origins as needed)
-app.use(cors());; // Replace with your frontend URL
+app.use(cors());; // Replace with frontend URL
 
 // Routes
 app.get("/", (req, res) => {
