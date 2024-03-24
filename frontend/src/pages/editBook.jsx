@@ -15,7 +15,7 @@ const EditBook = () => {
 
 const [title, setTitle] = useState('');
 const [author, setAuthor] = useState('');
-const [publishYear, setPublishYear] = useState('');
+const [pageNumber, setPageNumber] = useState('');
 const [loading, setLoading] = useState(false);
 const navigate = useNavigate();
 const {id} = useParams();
@@ -26,7 +26,7 @@ axios.get(`http://localhost:5555/books/${id}`).then((response)=>{
   //set data
   setTitle(response.data.title);
     setAuthor(response.data.author);
-    setPublishYear(response.data.publishYear);
+    setPageNumber(response.data.pageNumber);
     setLoading(false);
 
 }).catch((error)=>{
@@ -44,7 +44,7 @@ const handleEditBook = () => {
 const data = {
   title,
   author,
-  publishYear,
+  pageNumber,
 };
 setLoading(true);
 axios.put(`http://localhost:5555/books/${id}`, data).then(()=>{
@@ -93,10 +93,10 @@ onChange={(e)=>setAuthor(e.target.value)} className='border-2 px-4 py-2 w-full' 
 <div className='my4
 '>
 
-<label className='text-xl mr-4'>Publish Year</label>
+<label className='text-xl mr-4'>Page Number</label>
 
-<input type="text" value={publishYear} 
-onChange={(e)=>setPublishYear(e.target.value)} className='border-2 px-4 py-2 w-full' />
+<input type="text" value={pageNumber} 
+onChange={(e)=>setPageNumber(e.target.value)} className='border-2 px-4 py-2 w-full' />
 
 </div>
 

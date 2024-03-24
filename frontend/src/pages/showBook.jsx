@@ -50,8 +50,8 @@ loading? (<Spinner/>) : (
 <span>{book.author}</span>
 </div>
 <div className='my-4'>
-<span className='text-xl mr-4 text-black'>Publish Year</span>
-<span>{book.publishYear}</span>
+<span className='text-xl mr-4 text-black'>Page Number</span>
+<span>{book.pageNumber}</span>
 </div>
 <div className='my-4'>
 <span className='text-xl mr-4 text-black'>Upload Date</span>

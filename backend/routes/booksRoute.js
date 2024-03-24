@@ -9,17 +9,19 @@ const router = express.Router();
 //Route to save a new book
 router.post("/", async (req, res) => {
     try {
-      if (!req.body.title || !req.body.author || !req.body.publishYear) {
+      if (!req.body.title || !req.body.author || !req.body.pageNumber) {
         return res.status(400).send({ message: "All fields are required" });
       }
   
       const newBook = {
         title: req.body.title,
         author: req.body.author,
-        publishYear: req.body.publishYear,
+        pageNumber: req.body.pageNumber,
       };
+
       const book = await Book.create(newBook);
       return res.status(201).send(book);
+
     } catch (error) {
       //log error message
       console.log(error.message); //??
@@ -47,6 +49,7 @@ router.post("/", async (req, res) => {
     }
   });
   
+  
   //get one book from db by id
   router.get("/:id", async (req, res) => {
     try {
@@ -63,7 +66,7 @@ router.post("/", async (req, res) => {
   //Route for updating a book
   router.put("/:id", async (req, res) => {
     try {
-      if (!req.body.title || !req.body.author || !req.body.publishYear) {
+      if (!req.body.title || !req.body.author || !req.body.pageNumber) {
         return response.status(400).send({ message: "All fields are required" });
       }
   

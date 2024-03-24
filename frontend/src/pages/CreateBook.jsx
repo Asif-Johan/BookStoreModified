@@ -14,7 +14,7 @@ const CreateBook = () => {
 
 const [title, setTitle] = useState('');
 const [author, setAuthor] = useState('');
-const [publishYear, setPublishYear] = useState('');
+const [pageNumber, setPageNumber] = useState('');
 const [loading, setLoading] = useState(false);
 const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ const handleSaveBook = () => {
 const data = {
   title,
   author,
-  publishYear,
+  pageNumber,
 };
 setLoading(true);
 axios.post('http://localhost:5555/books', data).then(()=>{
@@ -72,11 +72,13 @@ onChange={(e)=>setAuthor(e.target.value)} className='border-2 px-4 py-2 w-full' 
 
 <div className='my4
 '>
+  
+{/* Publish Year */}
+<label className='text-xl mr-4'>Page Number</label> 
 
-<label className='text-xl mr-4'>Publish Year</label>
 
-<input type="text" value={publishYear} 
-onChange={(e)=>setPublishYear(e.target.value)} className='border-2 px-4 py-2 w-full' />
+<input type="text" value={pageNumber} 
+onChange={(e)=>setPageNumber(e.target.value)} className='border-2 px-4 py-2 w-full' />
 
 </div>
 
