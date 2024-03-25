@@ -32,10 +32,12 @@ app.get("/", (req, res) => {
 
 //Post Borrow Req route
 app.post("/borrow", async(req,res)=>{
+  
     const studentName =req.body.studentName;
     const studentId =req.body.studentId;
     const studentMobile = req.body.studentMobile;
     const studentEmail = req.body.studentEmail;
+    const bookId =req.body.bookId;
     const bookName =req.body.bookName;
     const requestedDays =req.body.requestedDays;
 
@@ -46,6 +48,7 @@ app.post("/borrow", async(req,res)=>{
       studentId: studentId,
       studentMobile: studentMobile,
       studentEmail: studentEmail,
+      bookId: bookId,
       bookName: bookName,
       requestedDays: requestedDays,
     });

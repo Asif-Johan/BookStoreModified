@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+
 const borrowSchema = new mongoose.Schema({
     studentName: {
         type: String,
@@ -18,9 +19,18 @@ const borrowSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    bookId: {
+        //bring book from bookSchema
+
+type: mongoose.Schema.Types.ObjectId,
+// type: String,
+ref: "Book",
+ // required: true,
+    },
+
     bookName: {
         type: String,
-        required: true,
+
     },
     requestedDays: {
         type: Number,
