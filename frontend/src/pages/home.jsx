@@ -38,10 +38,14 @@ const Home = ({ isAdmin }) => {
         <h1>Books</h1>
 
         {isLoggedAdmin && (
-          <div>
+          <div className="flex gap-12">
             <Link to={"/books/create"} className="flex gap-1">
               <MdOutlineAddBox className="mt-1 pt-1 text-blue-400" />
               <p>Add Book</p>
+            </Link>
+
+            <Link to={"/borrow/requests"} className="flex gap-1">
+              <p>All Borrow Request</p>
             </Link>
           </div>
         )}
@@ -73,31 +77,18 @@ const Home = ({ isAdmin }) => {
                     <BsInfoCircle className="text-blue-400 text-2xl" />
                   </Link>
 
-
-{/* Borrow */}
-{!isLoggedAdmin &&(
-  <div>
-    <Link to={`/books/borrow/${book._id}`}>
-    <p className="bg-red-200 rounded-md px-2 shadow-lg ">Borrow</p>
-    </Link>
-  </div>
-)}
-
-
-
-
-
-
-
-
-
-
+                  {/* Borrow */}
+                  {!isLoggedAdmin && (
+                    <div>
+                      <Link to={`/books/borrow/${book._id}`}>
+                        <p className="bg-red-200 rounded-md px-2 shadow-lg ">
+                          Borrow
+                        </p>
+                      </Link>
+                    </div>
+                  )}
 
                   {isLoggedAdmin && (
-                    
-                    
-                    
-                    
                     <>
                       <Link to={`/books/edit/${book._id}`}>
                         <AiOutlineEdit className="text-green-400 text-2xl" />
@@ -115,14 +106,16 @@ const Home = ({ isAdmin }) => {
       )}
       {books.length === 0 && !loading && <p>No books found.</p>}
 
-
-
-
       {isLoggedAdmin ? (
         <div className="mt-96 text-center">
-
-            <h3 className="cursor-pointer" onClick={()=>{window.location.reload()}}>Logout From Admin</h3>
-          
+          <h3
+            className="cursor-pointer"
+            onClick={() => {
+              window.location.reload();
+            }}
+          >
+            Logout From Admin
+          </h3>
         </div>
       ) : (
         <div className="mt-96 text-center">

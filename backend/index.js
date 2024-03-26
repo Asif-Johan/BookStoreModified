@@ -31,6 +31,7 @@ app.get("/", (req, res) => {
 
 
 //Post Borrow Req route
+//post
 app.post("/borrow", async(req,res)=>{
   
     const studentName =req.body.studentName;
@@ -38,7 +39,7 @@ app.post("/borrow", async(req,res)=>{
     const studentMobile = req.body.studentMobile;
     const studentEmail = req.body.studentEmail;
     const bookId =req.body.bookId;
-    const bookName =req.body.bookName;
+    
     const requestedDays =req.body.requestedDays;
 
     //create in Db
@@ -49,12 +50,29 @@ app.post("/borrow", async(req,res)=>{
       studentMobile: studentMobile,
       studentEmail: studentEmail,
       bookId: bookId,
-      bookName: bookName,
+      
       requestedDays: requestedDays,
     });
 
     res.json({borrow: borrow});
 });
+
+//fetch
+app.get("/246admin/borrow/requests", async(req,res)=>{
+  try {
+    const borrows = await Borrow.find({});
+
+    return res.status(200).json({
+      count: borrows.length,
+      data: borrows,
+    });
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+})
+
+
 
 
 

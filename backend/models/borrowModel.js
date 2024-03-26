@@ -28,10 +28,7 @@ ref: "Book",
  // required: true,
     },
 
-    bookName: {
-        type: String,
-
-    },
+   
     requestedDays: {
         type: Number,
          required: true,

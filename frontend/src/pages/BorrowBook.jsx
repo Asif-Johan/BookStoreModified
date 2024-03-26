@@ -23,7 +23,7 @@ const [borrow, setBorrow] = useState(null);
 
 const [createForm, setCreateForm] = useState({
     bookId:id,
-    bookName:"",
+    
     studentName:"",
     studentId:"",
     studentMobile:"",
@@ -61,7 +61,7 @@ const handleChange = (e) => {
     e.preventDefault();
     console.log(createForm);
     console.log(id + book.title);
-    setCreateForm({...createForm, bookname:book.title, bookId:id});
+    setCreateForm({...createForm, bookId:id});
     console.log(createForm);
 
     
@@ -74,7 +74,7 @@ const handleChange = (e) => {
     const res = axios.post('http://localhost:5555/borrow', createForm).then(
       (res)=>{
 // console.log("Borrow Request Added", res);
-// navigate('/');
+navigate('/');
       }
     ).catch(
       (err)=>{
