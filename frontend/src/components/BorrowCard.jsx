@@ -1,7 +1,36 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useState } from 'react'
 import {FaEnvelope, FaEdit, FaPhone, FaBook, FaClock, FaIdBadge} from 'react-icons/fa'
 
 const BorrowCard = (props) => {
+  const [createEmail, setCreateEmail] =useState({
+name : props.studentName,
+studentId : props.studentId,
+email : props.studentEmail,
+mobile : props.studentMobile,
+reqDays :props.requestedDays,
+approveStatus : true,
+
+  })
+
+
+const sendEmail=(e)=>{
+  console.log("sendEmailHit", e.target.value);
+setCreateEmail({...createEmail, approveStatus: e.target.value}) 
+
+  axios.post("http://localhost:5555/nodemailer", createEmail).then(
+    (res)=>{
+      console.log("Email Sent from frontend", res);
+      console.log(createEmail);
+    }
+  ).catch(
+    (err)=>{
+      console.log(err);
+    }
+  )
+
+}
+
   return (
     <div>
       <div className='card border border-green-600 rounded-3xl flex flex-col gap-3 px-10 py-5'>
@@ -14,8 +43,8 @@ const BorrowCard = (props) => {
             <p className='flex gap-1'><FaClock className='mt-2'/>: {props.requestedDays+" Days"}</p>
         </div>
         <div className='flex justify-between pt-4 pb-3 '>
-          <button className='bg-green-400 rounded-md hover:rotate-3 px-3'>Accept</button>
-          <button className='bg-red-400 rounded-md hover:rotate-3 px-3'>Reject</button>
+          <button onClick={sendEmail} value={true} className='bg-green-400 rounded-md hover:rotate-3 px-3'>Accept</button>
+          <button onClick={sendEmail} value={false}  className='bg-red-400 rounded-md hover:rotate-3 px-3'>Reject</button>
         </div>
 
       </div>

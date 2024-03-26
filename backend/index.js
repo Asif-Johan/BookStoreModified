@@ -14,6 +14,7 @@ import {Borrow} from "./models/borrowModel.js"
 
 // Import CORS for cross-origin requests (if needed)
 import cors from "cors";
+import nodeMailer from "./routes/emailRoute.js";
 
 const app = express();
 
@@ -28,6 +29,8 @@ app.get("/", (req, res) => {
   console.log(req);
   return res.status(200).send("Hello world from backend!");
 });
+
+app.post("/nodemailer", nodeMailer)
 
 
 //Post Borrow Req route
