@@ -1,35 +1,45 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {FaEnvelope, FaEdit, FaPhone, FaBook, FaClock, FaIdBadge} from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom';
 
 const BorrowCard = (props) => {
-  const [createEmail, setCreateEmail] =useState({
-name : props.studentName,
-studentId : props.studentId,
-email : props.studentEmail,
-mobile : props.studentMobile,
-reqDays :props.requestedDays,
-approveStatus : true,
 
-  })
+  const navigate =useNavigate();
 
+  const approve = true;
+const requestArray = [
+props.studentName,
+props.bookName,
+props.studentId,
+props.studentEmail,
+props.studentMobile,
+props.requestedDays,
+approve
+  ];
 
-const sendEmail=(e)=>{
-  console.log("sendEmailHit", e.target.value);
-setCreateEmail({...createEmail, approveStatus: e.target.value}) 
+  const setApproveAccepted = () => {
+   requestArray[6] = true;
+  
+   axios.post("http://localhost:5555/nodemailer", requestArray).then(
+   navigate("/")
+   ).catch(err=>{
+    console.log(err);
+   })
+  }
 
-  axios.post("http://localhost:5555/nodemailer", createEmail).then(
-    (res)=>{
-      console.log("Email Sent from frontend", res);
-      console.log(createEmail);
-    }
-  ).catch(
-    (err)=>{
+  const setApproveRejected = () => {
+    requestArray[6] = false;
+  
+    axios.post("http://localhost:5555/nodemailer", requestArray).then(
+      navigate("/")
+     ).catch(err=>{
       console.log(err);
-    }
-  )
+     })
 
-}
+  }
+
+
 
   return (
     <div>
@@ -43,8 +53,8 @@ setCreateEmail({...createEmail, approveStatus: e.target.value})
             <p className='flex gap-1'><FaClock className='mt-2'/>: {props.requestedDays+" Days"}</p>
         </div>
         <div className='flex justify-between pt-4 pb-3 '>
-          <button onClick={sendEmail} value={true} className='bg-green-400 rounded-md hover:rotate-3 px-3'>Accept</button>
-          <button onClick={sendEmail} value={false}  className='bg-red-400 rounded-md hover:rotate-3 px-3'>Reject</button>
+          <button onClick={setApproveAccepted}  className='bg-green-400 rounded-md hover:rotate-3 px-3'>Accept</button>
+          <button  onClick={setApproveRejected}    className='bg-red-400 rounded-md hover:rotate-3 px-3'>Reject</button>
         </div>
 
       </div>

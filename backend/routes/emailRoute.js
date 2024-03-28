@@ -2,16 +2,16 @@ import nodemailer from "nodemailer";
 
 const nodeMailer = async (req,res) =>{
 
-const name = req.body.name;
-const bookTitle = req.body.bookTitle? req.body.bookTitle:"No Title Mentioned";
-const studentId = req.body.studentId;
-const email = req.body.email;
-const mobile = req.body.mobile;
-const reqDays = req.body.reqDays;
-const approveStatus = req.body.approveStatus;
+const name = req.body[0];
+const bookTitle = req.body[1]? req.body[1]:"No Title Mentioned";
+const studentId = req.body[2];
+const email = req.body[3];
+const mobile = req.body[4];
+const reqDays = req.body[5];
+const approveStatus = req.body[6];
 
 
-
+// console.log(req.body ,name, bookTitle, studentId, email, mobile, reqDays, approveStatus);
 
 var transporter = nodemailer.createTransport({
   service: 'gmail',
