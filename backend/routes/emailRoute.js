@@ -65,9 +65,8 @@ var mailOptions = {
     </div>
     <div class="message">
       <p>As salamu alaikum,</p>
-      <p>Dear ${name}, student id ${studentId}</p>
-      <p>student id ${studentId}</p>
-      <p>student id ${email}</p>
+      <p>Dear ${name}, ${studentId}</p>
+      <p>Email ${email}</p>
       
       <p>Your request to borrow a book has been 
       ${approveStatus ? 'Accepted' : 'Rejected'}.</p>

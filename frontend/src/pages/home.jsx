@@ -14,7 +14,8 @@ const Home = ({ isAdmin }) => {
   const isLoggedAdmin = isAdmin;
   // You can replace this with your logic to determine if the user is an admin
 
-  useEffect(() => {
+  useEffect((e) => {
+    
     const fetchData = async () => {
       setLoading(true);
       setError(null);
@@ -34,8 +35,8 @@ const Home = ({ isAdmin }) => {
 
   return (
     <div className="container mx-auto">
-      <div className="flex justify-between pt-5 text-3xl pb-5">
-        <h1>Books</h1>
+      <div className="flex justify-between pt-5 text-3xl pb-5 w-[90vw] mx-auto">
+        <h1 className="mx-auto bg-green-50 rounded-2xl px-5 text-green-600 font-semibold border border-green-600 shadow-lg shadow-green-200 mb-4">Books</h1>
 
         {isLoggedAdmin && (
           <div className="flex gap-12">
@@ -54,7 +55,7 @@ const Home = ({ isAdmin }) => {
       {loading && <p>Loading books...</p>}
       {error && <p>Error: {error}</p>}
       {books.length > 0 && (
-        <table className="table-auto w-full">
+        <table className="table-auto w-[90vw] mx-auto">
           <thead>
             <tr>
               <th className="px-2 py-1">No.</th>

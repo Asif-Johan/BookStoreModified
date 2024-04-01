@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const BorrowCard = (props) => {
 
   const navigate =useNavigate();
+  const borrowId = props.borrowId;
 
   const approve = true;
 const requestArray = [
@@ -22,20 +23,38 @@ approve
    requestArray[6] = true;
   
    axios.post("http://localhost:5555/nodemailer", requestArray).then(
-   navigate("/")
+   
    ).catch(err=>{
     console.log(err);
    })
+
+   axios.delete(`http://localhost:5555/admin/borrow/request/${borrowId}`).then(()=>{
+    alert('Request Accepted and deleted')
+    props.updateData();
+
+   }).catch(err=>{
+    console.log(err);
+   });
+   
   }
 
   const setApproveRejected = () => {
     requestArray[6] = false;
   
     axios.post("http://localhost:5555/nodemailer", requestArray).then(
-      navigate("/")
      ).catch(err=>{
       console.log(err);
      })
+
+    //  console.log(borrowid);
+     axios.delete(`http://localhost:5555/admin/borrow/request/${borrowId}`).then(()=>{
+      alert('Request rejected and deleted')
+      props.updateData();
+
+     }).catch(err=>{
+      console.log(err);
+     });
+
 
   }
 

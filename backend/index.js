@@ -60,7 +60,7 @@ app.post("/borrow", async(req,res)=>{
     res.json({borrow: borrow});
 });
 
-//fetch
+//fetch all borrow reqs
 app.get("/246admin/borrow/requests", async(req,res)=>{
   try {
     const borrows = await Borrow.find({});
@@ -73,6 +73,24 @@ app.get("/246admin/borrow/requests", async(req,res)=>{
     console.log(error.message);
     res.status(500).send({ message: error.message });
   }
+})
+ //delete a borrow req from db
+ app.delete("/admin/borrow/request/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await Borrow.findByIdAndDelete(id);
+    if (!result) {
+      return res.status(404).send({ message: "Borrow Req not found" });
+    } else {
+      return res.status(200).send({ message: "Borrow Req deleted successfully" });
+    }
+  }
+  
+  catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+
 })
 
 

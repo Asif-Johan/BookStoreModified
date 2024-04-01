@@ -17,6 +17,7 @@ router.post("/", async (req, res) => {
         title: req.body.title,
         author: req.body.author,
         pageNumber: req.body.pageNumber,
+        isBorrowed: false,
       };
 
       const book = await Book.create(newBook);

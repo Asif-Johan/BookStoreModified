@@ -7,8 +7,10 @@ import DeleteBook from './pages/deleteBook.jsx';
 import ShowBook from './pages/showBook.jsx';
 import AdminLogin from './pages/AdminLogin.jsx';
 import BorrowBook from './pages/BorrowBook.jsx';
+import Header from './components/Header.jsx';
+import About from './pages/About.jsx';
 import AdminShowBorrowRequest from './pages/AdminShowBorrowRequest.jsx';
-import {FaEnvelope,FaClock,FaIdCard, FaEdit, FaPhone, FaBook} from 'react-icons/fa'
+import {FaEnvelope,FaClock,FaIdCard, FaEdit, FaPhone, FaBook, FaBars} from 'react-icons/fa'
 
 
 const App = () => {
@@ -22,7 +24,10 @@ const App = () => {
 
   return (
     <>
+    <Header isAdmin={isAdmin}/>
+    
       <Routes>
+        <Route path='/about' element={<About/>}></Route>
         <Route path='/' element={<Home isAdmin={isAdmin} />} /> {/* Passing isAdmin as prop to Home */}
         <Route path='/books/create' element={<CreateBook />} />
         <Route path='/books/edit/:id' element={<EditBook />} />

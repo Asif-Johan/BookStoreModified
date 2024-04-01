@@ -6,43 +6,48 @@ import BorrowCard from "../components/BorrowCard";
 const AdminShowBorrowRequest = () => {
   const [matchedRequests, setMatchedRequests] = useState([]);
 
+  const fetchData = async () => {
+    try {
+      const borrowRes = await axios.get("http://localhost:5555/246admin/borrow/requests");
+      const bookRes = await axios.get("http://localhost:5555/books");
+
+      const borrowRequests = borrowRes.data.data;
+      const books = bookRes.data.data;
+      console.log("Books", books);
+      console.log("BorrowReq", borrowRequests);
+      
+
+
+      const matched = borrowRequests.filter((request)=>
+      books.some((book)=>book._id===request.bookId)
+      );
+      
+      const mathcedWithNames = matched.map((request)=>{
+        const matchedBook = books.find(book=> book._id === request.bookId);
+        const nameOfBook = matchedBook? matchedBook.title:"Unknown";
+        return {...request,nameOfBook}
+      })
+      setMatchedRequests(mathcedWithNames);
+      
+    }
+      
+      catch (err) {
+        console.error(err);
+      }
+
+  };
+
   //useEffect
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const borrowRes = await axios.get("http://localhost:5555/246admin/borrow/requests");
-        const bookRes = await axios.get("http://localhost:5555/books");
-
-        const borrowRequests = borrowRes.data.data;
-        const books = bookRes.data.data;
-        console.log("Books", books);
-        console.log("BorrowReq", borrowRequests);
-        
-
-
-        const matched = borrowRequests.filter((request)=>
-        books.some((book)=>book._id===request.bookId)
-        );
-        
-        const mathcedWithNames = matched.map((request)=>{
-          const matchedBook = books.find(book=> book._id === request.bookId);
-          const nameOfBook = matchedBook? matchedBook.title:"Unknown";
-          return {...request,nameOfBook}
-        })
-        setMatchedRequests(mathcedWithNames);
-        
-      }
-        
-        catch (err) {
-          console.error(err);
-        }
-
-    };
     fetchData();
-
   }, []);
 
     console.log("\n mathcedRequests outside fetch", matchedRequests);
+
+
+    const updateData = () => {
+      fetchData();
+    }
 
 
   return (
@@ -71,6 +76,10 @@ const AdminShowBorrowRequest = () => {
             studentEmail={matchedRequest.studentEmail}
             studentMobile={matchedRequest.studentMobile}
             requestedDays={matchedRequest.requestedDays}
+            bookId={matchedRequest.bookId}
+            borrowId={matchedRequest._id}
+            updateData={updateData}
+            
           />
         </div>
 ))}
