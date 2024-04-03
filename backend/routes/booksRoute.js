@@ -2,6 +2,13 @@
 import express from 'express';
 import { Book } from '../models/bookModel.js';
 
+//authentication
+const auth = (req, res, next) => {
+  // console.log("Hi", req.query.isAdmin);
+    next(); 
+};
+
+
 
 const router = express.Router();
 

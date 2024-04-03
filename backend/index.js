@@ -5,6 +5,7 @@ import { PORT } from "./config.js";
 import mongoose from "mongoose";
 
 import { MongoDBURL } from "./config.js";
+import dotenv from "dotenv";
 
 // Import books model and routes
 import { Book } from "./models/bookModel.js";
@@ -23,12 +24,41 @@ app.use(express.json());
 
 // Enable CORS (adjust origins as needed)
 app.use(cors());; // Replace with frontend URL
+dotenv.config();
+console.log("Entry through index");
+// console.log("Admin:" , process.env.AdminEmail, process.env.AdminPass);
 
-// Routes
-app.get("/", (req, res) => {
-  console.log(req);
-  return res.status(200).send("Hello world from backend!");
-});
+// //Middleware
+// const auth = (req,res,next) =>{
+//   const Email = req.query.Email;
+//   const Password = req.query.Password;
+//   console.log("Request:",Email, Password, "Admin:", process.env.AdminEmail, process.env.AdminPass);
+
+//   if (process.env.AdminEmail === Email && process.env.AdminPass === Password){
+//     next();
+//   }else{
+//     res.status(401).send(false);
+//     console.log("Unauthorized");s
+//     return;
+  
+//   }
+// }
+
+
+
+// // Routes for login
+// app.get("/confirmAdmin", auth, ( req, res) => {
+//   console.log("Recieved get req", req, res);
+//   return res.status(200).send(true);
+// });
+
+
+const auth = (req, res, next) => {
+  // console.log("Hi", req.query.isAdmin);
+    next(); 
+};
+
+
 
 app.post("/nodemailer", nodeMailer)
 
@@ -61,7 +91,7 @@ app.post("/borrow", async(req,res)=>{
 });
 
 //fetch all borrow reqs
-app.get("/246admin/borrow/requests", async(req,res)=>{
+app.get("/246admin/borrow/requests",auth, async(req,res)=>{
   try {
     const borrows = await Borrow.find({});
 
@@ -92,6 +122,8 @@ app.get("/246admin/borrow/requests", async(req,res)=>{
   }
 
 })
+
+
 
 
 

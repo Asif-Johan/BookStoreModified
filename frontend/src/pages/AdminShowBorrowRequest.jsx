@@ -3,12 +3,18 @@ import BackButton from "../components/BackButton";
 import axios from "axios";
 import BorrowCard from "../components/BorrowCard";
 
-const AdminShowBorrowRequest = () => {
+const AdminShowBorrowRequest = ({isAdmin}) => {
+  console.log("All Borrow Req for Admin",isAdmin);
+
   const [matchedRequests, setMatchedRequests] = useState([]);
 
   const fetchData = async () => {
     try {
-      const borrowRes = await axios.get("http://localhost:5555/246admin/borrow/requests");
+      const borrowRes = await axios.get("http://localhost:5555/246admin/borrow/requests", {
+        params : {
+          isAdmin: isAdmin,
+        }
+      } );
       const bookRes = await axios.get("http://localhost:5555/books");
 
       const borrowRequests = borrowRes.data.data;
@@ -31,8 +37,8 @@ const AdminShowBorrowRequest = () => {
       
     }
       
-      catch (err) {
-        console.error(err);
+      catch (error) {
+        // isAdmin?console.log(error):"Error, False Request";
       }
 
   };

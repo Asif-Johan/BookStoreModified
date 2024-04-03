@@ -29,12 +29,12 @@ const App = () => {
       <Routes>
         <Route path='/about' element={<About/>}></Route>
         <Route path='/' element={<Home isAdmin={isAdmin} />} /> {/* Passing isAdmin as prop to Home */}
-        <Route path='/books/create' element={<CreateBook />} />
-        <Route path='/books/edit/:id' element={<EditBook />} />
+        <Route path='/books/create' element={<CreateBook isAdmin={isAdmin}/>} />
+        <Route path='/books/edit/:id' element={<EditBook isAdmin={isAdmin}/>} />
         <Route path='/books/details/:id' element={<ShowBook />} />
-        <Route path='/books/delete/:id' element={<DeleteBook />} />
+        <Route path='/books/delete/:id' element={<DeleteBook isAdmin={isAdmin}/>} />
         <Route path='/books/borrow/:id' element={<BorrowBook />} />
-        <Route path='/borrow/requests' element={<AdminShowBorrowRequest/>}/>
+        <Route path='/borrow/requests' element={<AdminShowBorrowRequest isAdmin={isAdmin}/>}/>
 
         <Route path='/admin/login' element={<AdminLogin onAdminLogin={handleAdminLogin} />} /> {/* Passing handleAdminLogin as prop to AdminLogin */}
       </Routes>

@@ -11,7 +11,9 @@ import { AiFillRedEnvelope } from 'react-icons/ai'
 
 
 
-const EditBook = () => {
+const EditBook = ({isAdmin}) => {
+  console.log("Edit", isAdmin);
+
 
 const [title, setTitle] = useState('');
 const [author, setAuthor] = useState('');
@@ -53,7 +55,7 @@ navigate('/');
 }).catch((error)=>{
   setLoading(false);
   alert('An Error is noticed. check console')
-console.log(error);
+  isAdmin?console.log(error):"Error, False Request";
 })
 
 }

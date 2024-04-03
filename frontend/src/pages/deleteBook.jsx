@@ -6,7 +6,8 @@ import Spinner from '../components/spinner'
 
 import { useNavigate, useParams } from 'react-router-dom'
 
-const deleteBook = () => {
+const deleteBook = ({isAdmin}) => {
+  console.log("Delete",isAdmin);
 
   const [loading, setLoading] = useState(false);
 const navigate = useNavigate();
@@ -23,7 +24,7 @@ const handleDeleteBook = () => {
   }).catch((error)=>{
     setLoading(false);
     alert('An Error is noticed. check console')
-console.log(error);
+    isAdmin?console.log(error):"Error, False Request";
   })
 }
 

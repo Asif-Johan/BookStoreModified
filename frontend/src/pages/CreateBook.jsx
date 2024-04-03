@@ -10,7 +10,9 @@ import { useNavigate } from 'react-router-dom'
 
 
 
-const CreateBook = () => {
+const CreateBook = ({isAdmin}) => {
+  console.log("Create", isAdmin);
+
 
 const [title, setTitle] = useState('');
 const [author, setAuthor] = useState('');
