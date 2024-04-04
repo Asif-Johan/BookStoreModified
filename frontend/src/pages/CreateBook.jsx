@@ -32,13 +32,13 @@ const data = {
 setLoading(true);
 
 
-axios.post('http://localhost:5555/books', data).then(()=>{
+axios.post('https://bookstoremodified.onrender.com/books', data).then(()=>{
 setLoading(false);
 navigate('/');
 }).catch((error)=>{
   setLoading(false);
   alert('An Error is noticed. check console')
-console.log(error);
+isAdmin?console.log(error):"Error, False Request";
 })
 
 }

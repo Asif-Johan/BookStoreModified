@@ -32,7 +32,7 @@ const [preSearchResetBooks, setpreSearchResetBooks] = useState();
       setLoading(true);
       setError(null);
       try {
-        const response = await axios.get("http://localhost:5555/books");
+        const response = await axios.get("https://bookstoremodified.onrender.com/books");
         setBooks(response.data.data);
         setpreSearchResetBooks(response.data.data);
       } catch (err) {
