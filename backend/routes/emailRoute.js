@@ -23,9 +23,10 @@ var transporter = nodemailer.createTransport({
 
 var mailOptions = {
   from: 'library.isoruet.2024@gmail.com',
-  to: `library.isoruet.2024@gmail.com`,
+  to: `${email}`,
+  // to: `library.isoruet.2024@gmail.com`,
   //to:`${email}`
-  subject: `Your Request to borrow book has been ${approveStatus?`Accepted`:`Rejected`}`,
+  subject: `Your Request to borrow book:${bookTitle} has been ${approveStatus?`Accepted`:`Rejected`}`,
   html: `
   
   <!DOCTYPE html>
@@ -42,8 +43,8 @@ var mailOptions = {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid #green;
+    border-radius: 10%;
   }
   .header {
     text-align: center;
@@ -73,6 +74,9 @@ var mailOptions = {
       <p>Book Title: ${bookTitle}</p>
       <p>Request Date: ${reqDays}</p>
       <p>If you have any questions, please contact us.</p>
+      
+      ${approveStatus? "<p>You can collect the book from Zia-Hall Room: 114</p>" : ""}
+      
 
     </div>
     <div class="footer">
