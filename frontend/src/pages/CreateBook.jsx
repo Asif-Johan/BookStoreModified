@@ -38,7 +38,7 @@ navigate('/');
 }).catch((error)=>{
   setLoading(false);
   alert('An Error is noticed. check console')
-console.log(error);
+isAdmin?console.log(error):"Error, False Request";
 })
 
 }
